@@ -14,11 +14,19 @@ generate respository <name>
 
 ```
 
-## This cli provide a generator to speed up the development.
+### This cli provide a generator to speed up the development.
+
+## How to install cli?
+```
+    $ git clone https://github.com/jonybrn/darthmaul.git
+    $ echo 'export PATH="$PATH:$GOPATH/bin"' >> $HOME/.bash_profile
+    $ cd darthmaul && go install && source $HOME/.bash_profile
+```
 
 ## How to use it?
 ```
-    $ go get github.com/jonybrn/darthmaul
+Example:
+
     $ cd folder_to_create_entity
     $ darthmaul generate controller <name>
     $ darthmaul generate service <name>
