@@ -31,4 +31,5 @@ Example:
     $ darthmaul generate controller <name>
     $ darthmaul generate service <name>
     $ darthmaul generate respository <name>
+    $ darthmaul create-app <name>
 ```
