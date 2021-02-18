@@ -64,7 +64,7 @@ func (c generateCMD) CreateDir() (path string, err error) {
 	entityMap := make(map[string]string)
 	entityMap["controller"] = "controllers"
 	entityMap["service"] = "services"
-	entityMap["respository"] = "repositories"
+	entityMap["repository"] = "repositories"
 	// Create directory if it doesn't exist yet
 	if _, err := os.Stat(entityMap[c.Entity]); os.IsNotExist(err) {
 		os.Mkdir(entityMap[c.Entity], 0775)
