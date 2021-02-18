@@ -30,10 +30,16 @@ func (c generateCMD) Execute() (err error){
 
 	templateFile := templates.Boilerplate
 
+	path, err := c.CreateDir()
+	if err != nil {
+		return err
+	}
+
 	newContents := strings.Replace(string(templateFile), "darthImpl", fistLetterLowerCase + entityUpperCase + "Impl", -1)
 	newContents = strings.Replace(string(newContents), "Darth", fistLetterUpperCase + entityUpperCase, -1)
+	newContents = strings.Replace(string(newContents), "package template", "package " + path, -1)
 
-	f, err := os.Create(fistLetterLowerCase+"_"+c.Entity+".go")
+	f, err := os.Create(path+"/"+fistLetterLowerCase+"_"+c.Entity+".go")
 	if err != nil {
 		return err
 	}
@@ -55,4 +61,16 @@ func (c generateCMD) lcFirst(str string) string {
 		return string(unicode.ToLower(v)) + str[i+1:]
 	}
 	return ""
+}
+
+func (c generateCMD) CreateDir() (path string, err error) {
+	entityMap := make(map[string]string)
+	entityMap["controller"] = "controllers"
+	entityMap["service"] = "services"
+	entityMap["respository"] = "repositories"
+	// Create directory if it doesn't exist yet
+	if _, err := os.Stat(entityMap[c.Entity]); os.IsNotExist(err) {
+		os.Mkdir(entityMap[c.Entity], 0775)
+	}
+	return entityMap[c.Entity], err
 }
