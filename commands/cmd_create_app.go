@@ -71,6 +71,10 @@ func (c createAppCMD) GenerateBoilerPlate() (err error){
 		return err
 	}
 
+	// main.go
+	wg.Add(1)
+	go c.CreateFile(path+"/main.go", fmt.Sprintf(templates.MainTemplate, c.AppName), &wg)
+
 	// Create App folder and file
 	if err := c.CreateDir(path+"/app"); err != nil {
 		fmt.Errorf("Error creating folder " + path+"/app", err)
@@ -101,6 +105,46 @@ func (c createAppCMD) GenerateBoilerPlate() (err error){
 	wg.Add(1)
 	go c.CreateFile(path+"/controllers/ping_controller_test.go", templates.PingControllerTest, &wg)
 
+	// Create middlewares (cors.go)
+	if err := c.CreateDir(path+"/middlewares"); err != nil {
+		fmt.Errorf("Error creating folder " + path+"/middlewares", err)
+		return err
+	}
+
+	wg.Add(1)
+	go c.CreateFile(path+"/middlewares/cors.go", templates.CorsMiddleware, &wg)
+
+	// Create folder cmd/api/router
+	path = fmt.Sprintf("%s/cmd/api/router", c.AppName)
+	fmt.Println("Changing path to", fmt.Sprintf("%s/cmd/api/router", c.AppName))
+	if err := os.MkdirAll(path+"/factory", 0775); err != nil {
+		fmt.Errorf("Error creating folder " + path+"/factory", err)
+		return err
+	}
+
+	// urls.go
+	wg.Add(1)
+	go c.CreateFile(path+"/urls.go", fmt.Sprintf(templates.UrlsMapping, c.AppName), &wg)
+
+	// router.go
+	wg.Add(1)
+	go c.CreateFile(path+"/router.go", fmt.Sprintf(templates.RouterTemplate, c.AppName), &wg)
+
+	// router_test.go
+	wg.Add(1)
+	go c.CreateFile(path+"/router_test.go", templates.RouterTest, &wg)
+
+	// Change path to router/factory
+	path = fmt.Sprintf("%s/cmd/api/router/factory", c.AppName)
+	fmt.Println("Changing path to", fmt.Sprintf("%s/cmd/api/router/factory", c.AppName))
+
+	// controller_factory.go
+	wg.Add(1)
+	go c.CreateFile(path+"/controller_factory.go", fmt.Sprintf(templates.ControllerFactory, c.AppName), &wg)
+
+	// controller_factory_test.go
+	wg.Add(1)
+	go c.CreateFile(path+"/controller_factory_test.go", templates.FactoryTest, &wg)
 
 	wg.Wait()
 	return err
