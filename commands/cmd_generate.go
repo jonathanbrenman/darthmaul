@@ -30,10 +30,7 @@ func (c generateCMD) Execute() (err error){
 
 	templateFile := templates.Boilerplate
 
-	path, err := c.CreateDir()
-	if err != nil {
-		return err
-	}
+	path, _ := c.CreateDir()
 
 	newContents := strings.Replace(string(templateFile), "darthImpl", fistLetterLowerCase + entityUpperCase + "Impl", -1)
 	newContents = strings.Replace(string(newContents), "Darth", fistLetterUpperCase + entityUpperCase, -1)
