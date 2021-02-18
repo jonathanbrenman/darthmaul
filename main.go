@@ -30,6 +30,11 @@ func main() {
 				showError(menue, "missing argument should be: darthmaul generate <entity> <name>")
 			}
 			cmd = commands.NewGenerateCMD(args[1], args[2])
+		case "create-app":
+			if  len(args) < 2 {
+				showError(menue, "missing argument should be: darthmaul create-app <name>")
+			}
+			cmd = commands.NewCreateAppCMD(args[1])
 		default:
 			showError(menue, "command "+args[0]+" not valid.")
 	}

@@ -18,12 +18,16 @@ func NewMenu() Options {
 }
 
 func (m menue) Show() {
-	fmt.Println("Version 1.0.0")
+	fmt.Println("Version 1.0.1")
+	fmt.Println()
 	fmt.Println("Generate command:")
 	fmt.Println("generate controller <name>")
 	fmt.Println("generate service <name>")
 	fmt.Println("generate respository <name>")
-	fmt.Println("\n")
+	fmt.Println()
+	fmt.Println("Create command:")
+	fmt.Println("create-app <name>")
+	fmt.Println()
 }
 
 func (m menue) ShowLogo() {
