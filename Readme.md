@@ -10,7 +10,7 @@ ______           _   _    ___  ___            _
 Generate command:
 generate controller <name>
 generate service <name>
-generate respository <name>
+generate repository <name>
 
 ```
 
@@ -30,6 +30,6 @@ Example:
     $ cd folder_to_create_entity
     $ darthmaul generate controller <name>
     $ darthmaul generate service <name>
-    $ darthmaul generate respository <name>
+    $ darthmaul generate repository <name>
     $ darthmaul create-app <name>
 ```
