@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: dev.Dockerfile
     volumes:
-      - ./cmd/api:/go/src/%s/cmd/api
+      - ./api:/go/src/%s/api
     environment:
       - SCOPE=local
     ports:

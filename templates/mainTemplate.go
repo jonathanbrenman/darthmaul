@@ -3,10 +3,10 @@ package templates
 const (
 	MainTemplate = `package main
 
-import "%s/cmd/api/app"
-
 func main() {
-	app.Start()
+	// Configure router
+	router := router.NewRouter(":8080")
+	router.Setup()
 }
 `
 )

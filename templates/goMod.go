@@ -3,7 +3,7 @@ package templates
 const (
 	GoModule = `module %s
 
-go 1.14
+go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.6.3
