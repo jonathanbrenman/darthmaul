@@ -23,7 +23,7 @@ func (m menue) Show() {
 	fmt.Println("Generate command:")
 	fmt.Println("generate controller <name>")
 	fmt.Println("generate service <name>")
-	fmt.Println("generate respository <name>")
+	fmt.Println("generate repository <name>")
 	fmt.Println()
 	fmt.Println("Create command:")
 	fmt.Println("create-app <name>")
