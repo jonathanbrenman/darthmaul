@@ -18,29 +18,85 @@ func NewAddCMD(entity string) Command {
 
 func (c addCMD) Execute() (err error){
 	fmt.Println("Executing command add for entity", c.Entity,"...")
-	entityMap := make(map[string]error)
-	entityMap["cache"] = c.addCache()
-
-	return entityMap[c.Entity]
+	entityMap := make(map[string]func()error)
+	entityMap["redis"] = func() error {
+		return c.addCache()
+	}
+	entityMap["postgres"] =  func() error {
+		return c.addDBProviderPostgres()
+	}
+	entityMap["mysql"] =  func() error {
+		return c.addDBProviderMysql()
+	}
+	entityMap["sqlite"] =  func() error {
+		return c.addDBProviderSqlite()
+	}
+	return entityMap[c.Entity]()
 }
 
 func (c addCMD) addCache() (err error) {
-	c.createDir()
+	path = "cache"
+	c.createDir(path)
 
-	if err := c.addFile("cache/cache_provider.go", templates.CacheProvider); err != nil {
+	if err := c.addFile(path+"/cache_provider.go", templates.CacheProvider); err != nil {
 		return err
 	}
-	if err := c.addFile("cache/redis_provider.go", templates.RedisProvider); err != nil {
+	if err := c.addFile(path+"/redis_provider.go", templates.RedisProvider); err != nil {
 		return err
 	}
 	fmt.Println(`Run go get "github.com/go-redis/redis/v8"`)
 	return nil
 }
 
-func (c addCMD) createDir() {
+func (c addCMD) addDbBase(path string) (err error) {
+	c.createDir(path)
+	if err := c.addFile(path+"/db_provider.go", templates.DatabaseProvider); err != nil {
+		return err
+	}
+	fmt.Println(`Run go get gorm.io/gorm`)
+	return nil
+}
+
+func (c addCMD) addDBProviderMysql() (err error) {
+	path = "database"
+	if err := c.addDbBase(path); err != nil {
+		return err
+	}
+	if err := c.addFile(path+"/mysql_provider.go", templates.MysqlProvider); err != nil {
+		return err
+	}
+	fmt.Println(`Run go get gorm.io/driver/mysql`)
+	return nil
+}
+
+func (c addCMD) addDBProviderPostgres() (err error) {
+	path = "database"
+	if err := c.addDbBase(path); err != nil {
+		return err
+	}
+	if err := c.addFile(path+"/postgres_provider.go", templates.PostgresProvider); err != nil {
+		return err
+	}
+	fmt.Println(`Run go get gorm.io/driver/postgres`)
+	return nil
+}
+
+func (c addCMD) addDBProviderSqlite() (err error) {
+	path = "database"
+	if err := c.addDbBase(path); err != nil {
+		return err
+	}
+	if err := c.addFile(path+"/sqlite_provider.go", templates.SqliteProvider); err != nil {
+		return err
+	}
+	fmt.Println(`Run go get gorm.io/driver/sqlite`)
+	return nil
+}
+
+func (c addCMD) createDir(dirName string) {
 	// Create directory if it doesn't exist yet
-	if _, err := os.Stat(c.Entity); os.IsNotExist(err) {
-		os.Mkdir(c.Entity, 0775)
+	if _, err := os.Stat(dirName); os.IsNotExist(err) {
+		os.Mkdir(dirName, 0775)
 	}
 	return
 }

@@ -29,7 +29,10 @@ func (m menue) Show() {
 	fmt.Println("create-app <name>")
 	fmt.Println()
 	fmt.Println("Add command:")
-	fmt.Println("add cache")
+	fmt.Println("add redis")
+	fmt.Println("add postgres")
+	fmt.Println("add sqlite")
+	fmt.Println("add mysql")
 	fmt.Println()
 }
 

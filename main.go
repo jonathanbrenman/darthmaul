@@ -10,7 +10,10 @@ import (
 var (
 	allowedEntities = []string{"controller","service","repository"}
 	allowedAddEntities = map[string]bool{
-		"cache": true,
+		"redis": true,
+		"mysql": true,
+		"postgres": true,
+		"sqlite": true,
     }
 )
 

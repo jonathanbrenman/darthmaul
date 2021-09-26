@@ -18,7 +18,10 @@ Create command:
 create-app <name>
 
 Add command:
-add cache
+add redis
+add postgres
+add sqlite
+add mysql
 
 ```
 
@@ -40,4 +43,5 @@ Example:
     $ darthmaul generate service <name>
     $ darthmaul generate repository <name>
     $ darthmaul create-app <name>
+    $ darthmaul add <provider>
 ```
