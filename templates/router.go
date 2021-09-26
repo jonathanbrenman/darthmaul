@@ -3,10 +3,10 @@ package templates
 const (
 	UrlsMapping = `package router
 
-import "%s/api/router/factory"
+import "%s/api/controllers"
 
 func (r routerImpl) routes() {
-	factoryCtrl := factory.NewCtrlFactory()
+	factoryCtrl := controllers.NewCtrlFactory()
 
 	r.router.GET("/ping", factoryCtrl.BuildPingController().Ping)
 }

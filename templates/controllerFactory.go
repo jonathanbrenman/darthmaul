@@ -17,7 +17,7 @@ func (ctrlFactory *controllerBuildImpl) BuildPingController() PingController {
 	return NewPingController()
 }
 `
-	FactoryTest = `package factory
+	FactoryTest = `package controllers
 
 import (
 	"github.com/stretchr/testify/assert"
