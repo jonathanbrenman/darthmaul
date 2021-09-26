@@ -7,10 +7,18 @@ ______           _   _    ___  ___            _
 |___/ \____|_|   \__|_| |_\_|  |_/\____|\____|_|
                                                 
 
+Version 1.0.1
+
 Generate command:
 generate controller <name>
 generate service <name>
 generate repository <name>
+
+Create command:
+create-app <name>
+
+Add command:
+add cache
 
 ```
 

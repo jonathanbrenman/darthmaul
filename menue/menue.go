@@ -28,6 +28,9 @@ func (m menue) Show() {
 	fmt.Println("Create command:")
 	fmt.Println("create-app <name>")
 	fmt.Println()
+	fmt.Println("Add command:")
+	fmt.Println("add cache")
+	fmt.Println()
 }
 
 func (m menue) ShowLogo() {

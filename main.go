@@ -9,6 +9,9 @@ import (
 
 var (
 	allowedEntities = []string{"controller","service","repository"}
+	allowedAddEntities = map[string]bool{
+		"cache": true,
+    }
 )
 
 func main() {
@@ -35,6 +38,11 @@ func main() {
 				showError(menue, "missing argument should be: darthmaul create-app <name>")
 			}
 			cmd = commands.NewCreateAppCMD(args[1])
+		case "add":
+			if len(args) < 2 || !allowedAddEntities[args[1]]{
+				showError(menue, "missing argument should be: darthmaul add <entity>")
+			}
+			cmd = commands.NewAddCMD(args[1])
 		default:
 			showError(menue, "command "+args[0]+" not valid.")
 	}
