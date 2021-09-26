@@ -7,7 +7,7 @@ ______           _   _    ___  ___            _
 |___/ \____|_|   \__|_| |_\_|  |_/\____|\____|_|
                                                 
 
-Version 1.0.1
+Version 1.0.2
 
 Generate command:
 generate controller <name>
