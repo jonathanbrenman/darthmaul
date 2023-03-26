@@ -40,7 +40,7 @@ _cgo_export.*
 .idea
 .vscode
 **/tmp
-cmd/api/tmp/*
+api/tmp/*
 **/tmp
 `
 )

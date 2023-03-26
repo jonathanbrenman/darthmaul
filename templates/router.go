@@ -3,10 +3,10 @@ package templates
 const (
 	UrlsMapping = `package router
 
-import "%s/cmd/api/router/factory"
+import "%s/api/controllers"
 
 func (r routerImpl) routes() {
-	factoryCtrl := factory.NewCtrlFactory()
+	factoryCtrl := controllers.NewCtrlFactory()
 
 	r.router.GET("/ping", factoryCtrl.BuildPingController().Ping)
 }
@@ -69,7 +69,7 @@ func TestCORSMiddleware(t *testing.T) {
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"%s/cmd/api/middlewares"
+	"%s/api/middlewares"
 )
 
 type routerImpl struct {

@@ -1,12 +1,10 @@
 package templates
 
 const (
-	ControllerFactory = `package factory
-
-import "%s/cmd/api/controllers"
+	ControllerFactory = `package controllers
 
 type ControllerBuilder interface {
-	BuildPingController() controllers.PingController
+	BuildPingController() PingController
 }
 
 type controllerBuildImpl struct {}
@@ -15,11 +13,11 @@ func NewCtrlFactory() ControllerBuilder {
 	return &controllerBuildImpl{}
 }
 
-func (ctrlFactory *controllerBuildImpl) BuildPingController() controllers.PingController {
-	return controllers.NewPingController()
+func (ctrlFactory *controllerBuildImpl) BuildPingController() PingController {
+	return NewPingController()
 }
 `
-	FactoryTest = `package factory
+	FactoryTest = `package controllers
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -27,9 +25,8 @@ import (
 )
 
 func TestBuildPingController(t *testing.T) {
-	assert := assert.New(t)
 	factoryCtrl := NewCtrlFactory()
 	pingCtrl := factoryCtrl.BuildPingController()
-	assert.NotNil(pingCtrl)
+	assert.NotNil(t, pingCtrl)
 }`
 )

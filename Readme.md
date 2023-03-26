@@ -7,10 +7,21 @@ ______           _   _    ___  ___            _
 |___/ \____|_|   \__|_| |_\_|  |_/\____|\____|_|
                                                 
 
+Version 1.0.3
+
 Generate command:
 generate controller <name>
 generate service <name>
 generate repository <name>
+
+Create command:
+create-app <name>
+
+Add command:
+add redis
+add postgres
+add sqlite
+add mysql
 
 ```
 
@@ -32,4 +43,5 @@ Example:
     $ darthmaul generate service <name>
     $ darthmaul generate repository <name>
     $ darthmaul create-app <name>
+    $ darthmaul add <provider>
 ```

@@ -18,7 +18,7 @@ func NewMenu() Options {
 }
 
 func (m menue) Show() {
-	fmt.Println("Version 1.0.1")
+	fmt.Println("Version 1.0.3")
 	fmt.Println()
 	fmt.Println("Generate command:")
 	fmt.Println("generate controller <name>")
@@ -27,6 +27,12 @@ func (m menue) Show() {
 	fmt.Println()
 	fmt.Println("Create command:")
 	fmt.Println("create-app <name>")
+	fmt.Println()
+	fmt.Println("Add command:")
+	fmt.Println("add redis")
+	fmt.Println("add postgres")
+	fmt.Println("add sqlite")
+	fmt.Println("add mysql")
 	fmt.Println()
 }
 
