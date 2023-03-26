@@ -29,19 +29,30 @@ type redisCacheProvider struct {
 	cacheClient *redis.Client
 }
 
+var singletonRedisCli *redisCacheProvider
+
 func NewRedisProvider() CacheProvider {
+	if singletonRedisCli != nil {
+		return singletonRedisCli
+	}
+
 	redisClient := redis.NewClient(&redis.Options{
 		Addr: "REDIS_HOST",
 		DB:   0,
 	})
+	
 	err := redisClient.Ping(context.Background()).Err()
 	if err != nil {
 		panic(err)
 	}
+	
 	fmt.Println("redis connected ok.")
-	return &redisCacheProvider{
+	
+	singletonRedisCli = &redisCacheProvider{
 		cacheClient: redisClient,
 	}
+	
+	return singletonRedisCli
 }
 
 func (r *redisCacheProvider) Get(key string) (result []byte, err error) {

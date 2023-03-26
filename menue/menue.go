@@ -18,7 +18,7 @@ func NewMenu() Options {
 }
 
 func (m menue) Show() {
-	fmt.Println("Version 1.0.2")
+	fmt.Println("Version 1.0.3")
 	fmt.Println()
 	fmt.Println("Generate command:")
 	fmt.Println("generate controller <name>")

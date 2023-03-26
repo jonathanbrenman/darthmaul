@@ -9,11 +9,18 @@ type Darth interface {
 
 type darthImpl struct {}
 
+var singletonDarth *darthImpl
+
 func NewDarth() Darth {
-	return &darthImpl{}
+	if singletonDarth != nil {
+		return singletonDarth
+	}
+
+	singletonDarth = &darthImpl{}
+	return singletonDarth
 }
 
-func (d darthImpl) MyMethod() (err error) {
+func (%s *darthImpl) MyMethod() (err error) {
 	// Here put your code
 	return err
 }

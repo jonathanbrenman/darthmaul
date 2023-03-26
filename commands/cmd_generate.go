@@ -9,18 +9,18 @@ import (
 )
 
 type generateCMD struct {
-	Name string
+	Name   string
 	Entity string
 }
 
 func NewGenerateCMD(entity string, name string) Command {
 	return &generateCMD{
-		Name: name,
+		Name:   name,
 		Entity: entity,
 	}
 }
 
-func (c generateCMD) Execute() (err error){
+func (c generateCMD) Execute() (err error) {
 	fmt.Println("Executing command generate for entity", c.Entity, "with name", c.Name+"...")
 
 	fistLetterLowerCase := c.lcFirst(c.Name)
@@ -28,15 +28,15 @@ func (c generateCMD) Execute() (err error){
 
 	entityUpperCase := c.ucFirst(c.Entity)
 
-	templateFile := templates.Boilerplate
+	templateFile := fmt.Sprintf(templates.Boilerplate, string(fistLetterLowerCase[0]))
 
 	path, _ := c.CreateDir()
 
-	newContents := strings.Replace(string(templateFile), "darthImpl", fistLetterLowerCase + entityUpperCase + "Impl", -1)
-	newContents = strings.Replace(string(newContents), "Darth", fistLetterUpperCase + entityUpperCase, -1)
-	newContents = strings.Replace(string(newContents), "package template", "package " + path, -1)
+	newContents := strings.Replace(string(templateFile), "darthImpl", fistLetterLowerCase+entityUpperCase+"Impl", -1)
+	newContents = strings.Replace(string(newContents), "Darth", fistLetterUpperCase+entityUpperCase, -1)
+	newContents = strings.Replace(string(newContents), "package template", "package "+path, -1)
 
-	f, err := os.Create(path+"/"+fistLetterLowerCase+"_"+c.Entity+".go")
+	f, err := os.Create(path + "/" + fistLetterLowerCase + "_" + c.Entity + ".go")
 	if err != nil {
 		return err
 	}

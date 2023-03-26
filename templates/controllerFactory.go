@@ -25,9 +25,8 @@ import (
 )
 
 func TestBuildPingController(t *testing.T) {
-	assert := assert.New(t)
 	factoryCtrl := NewCtrlFactory()
 	pingCtrl := factoryCtrl.BuildPingController()
-	assert.NotNil(pingCtrl)
+	assert.NotNil(t, pingCtrl)
 }`
 )
